@@ -2,6 +2,7 @@ package com.example.project_sql;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,12 +17,20 @@ import java.sql.Statement;
 public class MainActivity extends AppCompatActivity {
     Connection connection;
     String ConnectionResult= "";
+    Button bt_main2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+    public void Next(View view) //переход на новую активность
+    {
+        Intent intent = new Intent(MainActivity.this, MainActivity2.class);
+        startActivity(intent);
+    }
+
 
     public void GetTextFromSql(View v){
         data = new ArrayList<Mobile_phone>();
