@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.sql.Connection;
@@ -23,17 +24,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void GetTextFromSql(View v){
-        TextView ID = findViewById(R.id.tv_ID);
-        TextView Manufacturer = findViewById(R.id.tv_Manufacturer);
-        TextView Model = findViewById(R.id.tv_Model);
-        TextView Storage = findViewById(R.id.tv_Storage);
-        TextView Color = findViewById(R.id.tv_Color);
-        TextView Cost = findViewById(R.id.tv_Cost);
+        data = new ArrayList<Mobile_phone>();
+        listView = findViewById(R.id.LV_Mobile_phone);
+        pAdapter = new Adapter(MainActivity.this, data);
 
     try{
         ConnectionHelper connectionHelper = new  ConnectionHelper();
         connection = connectionHelper.connectionClass();
-
+        {
         if(connection!=null)
         {
             String query = "Select * From [Mobile phone]";
@@ -42,23 +40,31 @@ public class MainActivity extends AppCompatActivity {
 
             while (resultSet.next())
             {
-                ID.setText(resultSet.getString(1));
-                Manufacturer.setText(resultSet.getString(2));
-                Model.setText(resultSet.getString(3));
-                Storage.setText(resultSet.getString(4));
-                Color.setText(resultSet.getString(5));
-                Cost.setText(resultSet.getString(6));
-            }
+                Mobile_phone tempMask = new Mobile_phone
+                        (resultSet.getInt("ID"),
+                                resultSet.getString("Manufacturer"),
+                                resultSet.getString("Model"),
+                                Integer.parseInt(resultSet.getString("Storage")),
+                                resultSet.getString("Color"),
+                                Integer.parseInt(resultSet.getString("Cost")),
+                                resultSet.getString("Image")
+                        );
 
+                data.add(tempMask);
+                pAdapter.notifyDataSetInvalidated();
+            }
         }
-        else
-        {
-            ConnectionResult = "Сheck Connection";
+        connection.close();
         }
+
     }
     catch(Exception ex)
     {
         Log.e("Error",ex.getMessage());
     }
     }
+
+
+
+
 }
