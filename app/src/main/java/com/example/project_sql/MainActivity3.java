@@ -118,7 +118,7 @@ public class MainActivity3 extends AppCompatActivity {
                 {
 
 
-                    query = "INSERT INTO [Mobile phone] (Manufacturer, Model, Storage,Color,Cost) VALUES ('" + Manufacturer.getText() + "', '" + Model.getText() + "', '" + Storage.getText() + "', '" + Color.getText() + "', '" + Cost.getText() + "')";
+                     query = "INSERT INTO [Mobile phone] (Manufacturer, Model, Storage,Color,Cost) VALUES ('" + Manufacturer.getText() + "', '" + Model.getText() + "', '" + Storage.getText() + "', '" + Color.getText() + "', '" + Cost.getText() + "')";
                 }
                 else
                 {
