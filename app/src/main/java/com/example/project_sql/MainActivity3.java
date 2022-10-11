@@ -104,7 +104,7 @@ public class MainActivity3 extends AppCompatActivity {
     public void Add(View v){
         if (Manufacturer.getText().length()==0 || Model.getText().length()==0  || Storage.getText().length()==0 || Color.getText().length()==0|| Cost.getText().length()==0)
         {
-            Toast.makeText(MainActivity3.this, "Не заполнены поля", Toast.LENGTH_SHORT).show();
+             Toast.makeText(MainActivity3.this, "Не заполнены поля", Toast.LENGTH_SHORT).show();
             return;
         }
         try {
