@@ -122,7 +122,7 @@ public class MainActivity3 extends AppCompatActivity {
                 }
                 else
                 {
-                    query = "INSERT INTO [Mobile phone]  (Manufacturer, Model, Storage,Color,Cost, Image) VALUES ('" + Manufacturer.getText() + "', '" + Model.getText() + "','" + Storage.getText() + "', '" + Color.getText() + "', '" + Cost.getText() + "',"+ img + ")";
+                    query = "INSERT INTO [Mobile phone]  (Manufacturer, Model, Storage,Color,Cost, Image) VALUES ('" +  Manufacturer.getText() + "', '" + Model.getText() + "','" + Storage.getText() + "', '" + Color.getText() + "', '" + Cost.getText() + "',"+ img + ")";
                 }
                 Statement statement = connection.createStatement();
                 Toast.makeText(MainActivity3.this,"Успешно добавлено", Toast.LENGTH_LONG).show();
