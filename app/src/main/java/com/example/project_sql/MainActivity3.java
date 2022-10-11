@@ -113,7 +113,7 @@ public class MainActivity3 extends AppCompatActivity {
             connection = connectionHelper.connectionClass();
 
 
-            if  (connection != null) {
+            if (connection != null) {
                 if(img==null)
                 {
 
