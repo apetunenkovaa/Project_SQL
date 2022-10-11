@@ -17,41 +17,31 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Base64;
 
-public class MainActivity2 extends AppCompatActivity {
-
+public class MainActivity3 extends AppCompatActivity {
     ImageView image;
     EditText Manufacturer,Model,Storage,Color,Cost;
-    Mobile_phone mask;
-    Connection connection;
-    View v;
     String img="";
-
+    Connection connection;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
-
-
-        mask = getIntent().getParcelableExtra("Mobile_phone");
+        setContentView(R.layout.activity_main3);
         image = findViewById(R.id.UpPhoto);
 
         Manufacturer=findViewById(R.id.Ed_Manufacturer);
-        Manufacturer.setText(mask.getManufacturer());
 
         Model=findViewById(R.id.Ed_Model);
-        Model.setText(mask.getModel());
 
         Storage = findViewById(R.id.Ed_Storage);
-        Storage.setText(Integer.toString(mask.getStorage()));
 
         Color=findViewById(R.id.Ed_Color);
-        Color.setText(mask.getColor());
 
         Cost = findViewById(R.id.Ed_Cost);
-        Cost.setText(Integer.toString(mask.getCost()));
+
 
     }
 
@@ -63,7 +53,7 @@ public class MainActivity2 extends AppCompatActivity {
             }
             return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         }
-        return BitmapFactory.decodeResource(MainActivity2.this.getResources(),
+        return BitmapFactory.decodeResource(MainActivity3.this.getResources(),
                 R.drawable.zaglushka);
     }
 
@@ -111,67 +101,52 @@ public class MainActivity2 extends AppCompatActivity {
         return "";
     }
 
-
-
-    public void Update(View v){
-
-        if (Manufacturer.getText().length()==0 || Model.getText().length()==0  || Storage.getText().length()==0 || Color.getText().length()==0|| Cost.getText().length()==0 )
+    public void Add(View v){
+        if (Manufacturer.getText().length()==0 || Model.getText().length()==0  || Storage.getText().length()==0 || Color.getText().length()==0|| Cost.getText().length()==0)
         {
-            Toast.makeText(MainActivity2.this, "Есть не заполненые поля", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity3.this, "Не заполнены поля", Toast.LENGTH_SHORT).show();
             return;
         }
-
         try {
             String query="";
             ConnectionHelper connectionHelper = new ConnectionHelper();
             connection = connectionHelper.connectionClass();
+
+
             if (connection != null) {
-                if(img=="")
+                if(img==null)
                 {
 
-                    query = "UPDATE [Mobile phone] Set Manufacturer = '" + Manufacturer.getText() + "', Model = '" + Model.getText() + "', Storage ='" + Storage.getText() + "', Color ='" + Color.getText() +  "', Cost ='" + Cost.getText() + "' WHERE ID= "+mask.getID()+"";
 
+                    query = "INSERT INTO [Mobile phone] (Manufacturer, Model, Storage,Color,Cost) VALUES ('" + Manufacturer.getText() + "', '" + Model.getText() + "', '" + Storage.getText() + "', '" + Color.getText() + "', '" + Cost.getText() + "')";
                 }
                 else
                 {
-
-                    query = "UPDATE [Mobile phone] Set Manufacturer = '" + Manufacturer.getText() + "', Model = '" + Model.getText() + "',  Storage ='" + Storage.getText() + "', Color ='" + Color.getText() +  "', Cost ='" + Cost.getText() + "', Image ='" + img + "' WHERE ID= "+mask.getID()+"";
+                    query = "INSERT INTO [Mobile phone]  (Manufacturer, Model, Storage,Color,Cost, Image) VALUES ('" + Manufacturer.getText() + "', '" + Model.getText() + "','" + Storage.getText() + "', '" + Color.getText() + "', '" + Cost.getText() + "',"+ img + ")";
                 }
                 Statement statement = connection.createStatement();
-                Toast.makeText(MainActivity2.this, "Данные изменены", Toast.LENGTH_SHORT).show();
-                statement.executeQuery(query);
+                Toast.makeText(MainActivity3.this,"Успешно добавлено", Toast.LENGTH_LONG).show();
+                ResultSet result = statement.executeQuery(query);
+
 
             }
         }
+
         catch (Exception ex)
         {
-
+            Toast.makeText(MainActivity3.this,"Произошла ошибка", Toast.LENGTH_LONG).show();
         }
+        Manufacturer.setText("");
+        Model.setText("");
+        Storage.setText("");
+        Color.setText("");
+        Cost.setText("");
+
         Next();
     }
-
     public void Next(){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-
-    public void Delete(View v){
-        try {
-            ConnectionHelper connectionHelper = new ConnectionHelper();
-            connection = connectionHelper.connectionClass();
-            if (connection != null) {
-                String query = "DELETE FROM  [Mobile phone]  WHERE ID= "+mask.getID()+"";
-                Statement statement = connection.createStatement();
-                statement.executeQuery(query);
-            }
-        }
-
-        catch (Exception ex)
-        {
-
-        }
-        Next();
-    }
 }
-
 

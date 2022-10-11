@@ -62,14 +62,14 @@ public class Mobile_phone implements Parcelable {
         Cost = cost;
     }
 
-    public int getID() {
-        return ID;
-    }
-
     public void setImage(String image) {
         Image = image;
     }
 
+
+    public int getID() {
+        return ID;
+    }
     public String getManufacturer() {
         return Manufacturer;
     }

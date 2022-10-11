@@ -7,11 +7,11 @@
 
     <ImageView
         android:id="@+id/image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         tools:layout_editor_absoluteX="2dp"
         tools:layout_editor_absoluteY="3dp"
-        tools:srcCompat="@tools:sample/avatars" />
+  />
 
 
     <TextView
@@ -19,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:text="Производитель"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,27 +29,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:text="Модель"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/tx_Manufacturer"  />
+        app:layout_constraintTop_toBottomOf="@+id/tx_Manufacturer" />
 
     <TextView
         android:id="@+id/tx_Storage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:text="Память"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/tx_Model"/>
+        app:layout_constraintTop_toBottomOf="@+id/tx_Model" />
 
     <TextView
         android:id="@+id/tx_Color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:text="Цвет"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/tx_Storage"/>
+        app:layout_constraintTop_toBottomOf="@+id/tx_Storage" />
 
 
     <TextView
@@ -56,17 +60,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:text="Стоимость"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/tx_Color"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tx_Color" />
 
-    <Button
-        android:id="@+id/by_Next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        tools:layout_editor_absoluteX="201dp"
-        tools:layout_editor_absoluteY="97dp"
-        app:layout_constraintTop_toBottomOf="@+id/tx_Cost"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

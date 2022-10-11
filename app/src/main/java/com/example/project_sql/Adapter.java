@@ -1,6 +1,7 @@
 package com.example.project_sql;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -39,13 +40,17 @@ public class Adapter extends BaseAdapter {
     }
     private Bitmap getUserImage(String encodedImg)
     {
-
+        byte[] bytes;
         if(encodedImg!=null&& !encodedImg.equals("null")) {
-            byte[] bytes = Base64.decode(encodedImg, Base64.DEFAULT);
+            bytes = Base64.decode(encodedImg, Base64.DEFAULT);
             return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
         }
         else
-            return null;}
+        {
+
+            return BitmapFactory.decodeResource(mContext.getResources(), R.drawable.zaglushka);
+        }
+    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -61,8 +66,7 @@ public class Adapter extends BaseAdapter {
         ImageView Image = v.findViewById(R.id.image);
 
 
-        Mobile_phone
-        mask = maskList.get(position);
+        Mobile_phone mask = maskList.get(position);
         Manufacturer.setText(mask.getManufacturer());
         Model.setText(mask.getModel());
         Storage.setText(Integer.toString(mask.getStorage()));
@@ -70,7 +74,17 @@ public class Adapter extends BaseAdapter {
         Cost.setText(Integer.toString(mask.getCost()));
         Image.setImageBitmap(getUserImage(mask.getImage()));
 
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent inten = new Intent(mContext,MainActivity2.class);
+                inten.putExtra("Mobile_phone",mask);
+                mContext.startActivity(inten);
+
+            }
+        });
         return v;
     }
+
 
 }
